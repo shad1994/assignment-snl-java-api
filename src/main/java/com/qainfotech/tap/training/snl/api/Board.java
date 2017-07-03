@@ -96,11 +96,11 @@ public class Board {
     public JSONArray deletePlayer(UUID playerUuid)
             throws NoUserWithSuchUUIDException, FileNotFoundException,
                 UnsupportedEncodingException{
+    	
         Boolean response = false;
         for(int i = 0; i < data.getJSONArray("players").length(); i++){
             JSONObject player = data.getJSONArray("players").getJSONObject(i);
-            
-            if(player.getString("uuid").equals(playerUuid.toString())){
+            if(player.get("uuid").toString().equals(playerUuid.toString())){
                 data.getJSONArray("players").remove(i);
                 data.put("turn", 0);
                 BoardModel.save(uuid, data);
